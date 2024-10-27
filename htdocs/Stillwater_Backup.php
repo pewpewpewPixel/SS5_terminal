@@ -1,55 +1,142 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.php">
     <title>SQL Dump Display</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #e9ecef;
+            color: #333;
+        }
+        nav {
+            background-color: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #495057;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            border: 1px solid #dddddd;
+            border: 1px solid #dee2e6;
             text-align: left;
             padding: 12px;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
+            font-weight: bold;
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f8f9fa;
         }
         tr:hover {
-            background-color: #eaeaea;
-        }
-        pre {
-            background-color: #efefef;
-            padding: 15px;
-            border: 1px solid #ccc;
-            overflow-x: auto;
+            background-color: #e2e6ea;
         }
         .center {
             text-align: center;
         }
-    {
-        <
-    }
     </style>
 </head>
 <body>
+<nav>
+    <a href="#home">Home</a>
+    <a href="#clients">Go to Clients</a>
+    <a href="#items">Go to Items</a>
+    <a href="#purchases">Go to Purchases</a>
+    <a href="#sales">Go to Sales</a>
+    <a href="#insert-clients">Insert Client Data</a>
+    <a href="#insert-items">Insert Item Data</a>
+    <a href="#insert-purchases">Insert Purchase Data</a>
+    <a href="#insert-sales">Insert Sale Data</a>
+</nav>
 
 <h1 class="center">Stillwater</h1>
 
-<h2>Table: Clients</h2>
+<h2 id="insert-clients">Insert Client Data</h2>
+<form action="insert_client.php" method="post">
+    <label for="clientFirstName">First Name:</label>
+    <input type="text" id="clientFirstName" name="clientFirstName" required><br><br>
+    
+    <label for="clientLastName">Last Name:</label>
+    <input type="text" id="clientLastName" name="clientLastName" required><br><br>
+    
+    <label for="clientAddress">Address:</label>
+    <input type="text" id="clientAddress" name="clientAddress" required><br><br>
+    
+    <input type="submit" value="Insert Client Data">
+</form>
+
+<h2 id="insert-items">Insert Item Data</h2>
+<form action="insert_item.php" method="post">
+    <label for="itemDescription">Description:</label>
+    <input type="text" id="itemDescription" name="itemDescription" required><br><br>
+    
+    <label for="askingPrice">Asking Price:</label>
+    <input type="number" id="askingPrice" name="askingPrice" required><br><br>
+    
+    <label for="itemCondition">Condition:</label>
+    <input type="text" id="itemCondition" name="itemCondition" required><br><br>
+    
+    <input type="submit" value="Insert Item Data">
+</form>
+
+<h2 id="insert-purchases">Insert Purchase Data</h2>
+<form action="insert_purchase.php" method="post">
+    <label for="purchaseCost">Purchase Cost:</label>
+    <input type="number" id="purchaseCost" name="purchaseCost" required><br><br>
+    
+    <label for="purchaseDate">Date Purchased:</label>
+    <input type="date" id="purchaseDate" name="purchaseDate" required><br><br>
+    
+    <label for="purchaseClient">Client Number:</label>
+    <input type="number" id="purchaseClient" name="purchaseClient" required><br><br>
+    
+    <input type="submit" value="Insert Purchase Data">
+</form>
+
+<h2 id="insert-sales">Insert Sale Data</h2>
+<form action="insert_sale.php" method="post">
+    <label for="commissionPaid">Commission Paid:</label>
+    <input type="number" id="commissionPaid" name="commissionPaid" required><br><br>
+    
+    <label for="sellingPrice">Actual Selling Price:</label>
+    <input type="number" id="sellingPrice" name="sellingPrice" required><br><br>
+    
+    <label for="salesTax">Sales Tax:</label>
+    <input type="number" id="salesTax" name="salesTax" required><br><br>
+    
+    <label for="saleDate">Date Sold:</label>
+    <input type="date" id="saleDate" name="saleDate" required><br><br>
+    
+    <label for="saleClient">Client Number:</label>
+    <input type="number" id="saleClient" name="saleClient" required><br><br>
+    
+    <input type="submit" value="Insert Sale Data">
+</form>
+
+<h2 id="clients">Table: Clients</h2>
 <table>
     <thead>
         <tr>
@@ -74,7 +161,7 @@
     </tbody>
 </table>
 
-<h2>Table: Items</h2>
+<h2 id="items">Table: Items</h2>
 <table>
     <thead>
         <tr>
@@ -99,7 +186,7 @@
     </tbody>
 </table>
 
-<h2>Table: Purchase</h2>
+<h2 id="purchases">Table: Purchase</h2>
 <table>
     <thead>
         <tr>
@@ -119,11 +206,10 @@
         <tr><td>6</td><td>500.00</td><td>2024-09-27</td><td>New</td><td>6</td></tr>
         <tr><td>7</td><td>700.00</td><td>2024-09-28</td><td>Refurbished</td><td>7</td></tr>
         <tr><td>8</td><td>300.00</td><td>2024-09-29</td><td>Used</td><td>8</td></tr>
-        <tr><td>9</td><td>200.00</td><td>2024-09-30</td><td>New</td><td>9</td></tr>
     </tbody>
 </table>
 
-<h2>Table: Sales</h2>
+<h2 id="sales">Table: Sales</h2>
 <table>
     <thead>
         <tr>
